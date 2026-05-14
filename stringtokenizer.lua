@@ -7,7 +7,6 @@ StringTokenizer.__index = StringTokenizer
 
 ffi.cdef [[
 typedef struct {
-    const char* string;
     unsigned short pBegin, pEnd;
     unsigned char captureIndex;
 } StringTokenizerToken;
@@ -66,10 +65,7 @@ function StringTokenizer.next(self)
         local pBegin, pEnd = self.string:find(capt, self.initPosition)
 
         if pBegin and pBegin == self.initPosition then
-            local str = self.string:sub(pBegin, pEnd)
-
             token = ffi.new("StringTokenizerToken", {
-                string = str .. "\0",
                 pBegin = pBegin,
                 pEnd = pEnd,
                 captureIndex = captureIndex
