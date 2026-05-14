@@ -34,7 +34,7 @@ while tokenizer:next() do
             -- trailing new line after dots and commas
             goto continue
         else
-            local str = ffi.string(tk.string) ..
+            local str = tokenizer.string:sub(tk.pBegin, tk.pEnd) ..
                 (tk.captureIndex == 2 and "\10" or "")
 
             lipsumFile:write(str)

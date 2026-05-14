@@ -14,5 +14,5 @@ tokenizer.captures = {
 
 -- works as an iterator, too
 for token in StringTokenizer.next, tokenizer do
-    print(ffi.string(token.string))
+    print(tokenizer.string:sub(token.pBegin, token.pEnd))
 end
