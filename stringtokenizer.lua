@@ -59,7 +59,7 @@ end
 ---@type fun(self: StringTokenizer, rep: integer?): pBegin: integer?, pEnd: integer?, captureIndex: integer?
 function StringTokenizer.seek(self, rep)
     if type(rep) ~= "number" and rep ~= nil then
-        error("bad argument #1 to 'new' (number expected, got" .. type(rep) .. ")", 2)
+        error("bad argument #1 to 'seek' (number expected, got" .. type(rep) .. ")", 2)
     end
 
     local position = self.initPosition
