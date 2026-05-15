@@ -56,6 +56,33 @@ function StringTokenizer.new(str)
     return tokenizer
 end
 
+---@type fun(self: StringTokenizer, rep: integer?): pBegin: integer?, pEnd: integer?, captureIndex: integer?
+function StringTokenizer.seek(self, rep)
+    if type(rep) ~= "number" and rep ~= nil then
+        error("bad argument #1 to 'new' (number expected, got" .. type(rep) .. ")", 2)
+    end
+
+    local position = self.initPosition
+    local rep = math.floor(rep) or 1
+    local pBegin, pEnd, captIndex
+
+    for i = 1, rep do
+        for captureIndex, capt in next, self.captures do
+            pBegin, pEnd = self.string:find(capt, position)
+
+            if pBegin and pBegin == position then
+                captIndex = captureIndex
+                position = pEnd + 1
+
+                goto next
+            end
+        end
+        ::next::
+    end
+
+    return pBegin, pEnd, captIndex
+end
+
 ---@type fun(self: StringTokenizer): ffi.cdata* | table?
 function StringTokenizer.next(self)
     local newPosition
