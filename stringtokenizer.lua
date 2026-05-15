@@ -7,7 +7,7 @@ StringTokenizer.__index = StringTokenizer
 
 ffi.cdef [[
 typedef struct {
-    unsigned short pBegin, pEnd;
+    unsigned int pBegin, pEnd;
     unsigned char captureIndex;
 } StringTokenizerToken;
 ]]
